@@ -1,17 +1,13 @@
-import requests
-from env import APP_API_BRANCH_1, APP_API_BRANCH_2
-# API endpoint
+from project.oop.postmane import Postmen
+from project.env import APP_API_BRANCH_1, APP_API_BRANCH_2, APP_PATHNAME
+URL_BASIC_API = "https://rdb.altlinux.org/api/"
 
-
-# Make the API request
-# response = requests.get(APP_URL_BASIC_API + APP_API_BRANCH_1)
-# response2 = requests.get(APP_URL_BASIC_API + APP_API_BRANCH_2)
-
-# Check if the request was successful
-# if response.status_code == 200:
-#     data = response.json()
-#     # Process the retrieved data
-#     print(data)
-# else:
-#
-#     raise ValueError(f"[Error]: {response.status_code} - {response.text} from the 'index.py'")
+async def filtering_data():
+    postmen = Postmen(pathnames=[APP_PATHNAME + APP_API_BRANCH_1, APP_PATHNAME + APP_API_BRANCH_2])
+    response = await postmen.get_api_request(urls=URL_BASIC_API)
+    filter_data = []
+    if isinstance(response, list):
+        for data_json in response:
+            filter_data.append(data_json['packages'])
+    else:
+        raise ValueError("[Error]: What something wrong to the 'filtering_data' from 'index.py")

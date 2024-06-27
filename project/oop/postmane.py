@@ -3,14 +3,11 @@ import aiohttp as aiohttp
 from project.oop.basic import BasicBranches
 from asyncio import *
 
-import requests as req
-
 class Postmen(BasicBranches):
 
 	def __init__(self, pathnames: list, ):
 		super().__init__(pathnames)
 		self.datas: list = []
-
 
 	async def get_api_request(self, urls:str) -> list:
 		async with aiohttp.ClientSession() as session:

@@ -3,7 +3,7 @@ class BasicBranches:
 	URL_BASIC_API = "https://rdb.altlinux.org/api/"
 	@classmethod
 	def validate(cls, arg):
-		return  type(arg) == list and len(cls.arg) > 0 and BasicBranches.check_list(arg)
+		return  type(arg) == list and len(arg) > 0 and BasicBranches.check_list(arg)
 
 	def __init__(self, pathnames: list):
 		'''
@@ -20,7 +20,7 @@ class BasicBranches:
 	@staticmethod
 	def check_list(arg):
 		true_false = []
-		for i in range(0, len(arg) - 1):
+		for i in range(0, len(arg)):
 			if type(arg[i]) != str:
 				true_false.append(False)
 				continue

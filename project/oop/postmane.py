@@ -10,6 +10,11 @@ class Postmen(BasicBranches):
 		self.datas: list = []
 
 	async def get_api_requestAll(self, urls:str) -> list:
+		'''
+			TODO: getting all the data
+		:param urls: type 'str'
+		:return: theis json's list received from the server
+		'''
 		async with aiohttp.ClientSession() as session:
 			for pathname in self.pathnames.copy():
 				url = urls + pathname

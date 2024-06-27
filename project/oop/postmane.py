@@ -9,7 +9,7 @@ class Postmen(BasicBranches):
 		super().__init__(pathnames)
 		self.datas: list = []
 
-	async def get_api_request(self, urls:str) -> list:
+	async def get_api_requestAll(self, urls:str) -> list:
 		async with aiohttp.ClientSession() as session:
 			for pathname in self.pathnames.copy():
 				url = urls + pathname

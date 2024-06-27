@@ -1,6 +1,6 @@
 # project/oop/basic.py
 class BasicBranches:
-	URL_BASIC_API = "https://rdb.altlinux.org/api/"
+
 	@classmethod
 	def validate(cls, arg):
 		return  type(arg) == list and len(arg) > 0 and BasicBranches.check_list(arg)
@@ -18,7 +18,7 @@ class BasicBranches:
 		else:
 			raise ValueError('[Error]: What something wrong at "BasicPostman" from the "basic.py".')
 	@staticmethod
-	def check_list(arg):
+	def check_list(arg: list):
 		true_false = []
 		for i in range(0, len(arg)):
 			if type(arg[i]) != str:

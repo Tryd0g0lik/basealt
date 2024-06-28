@@ -34,18 +34,18 @@ class Postmen(BasicBranches):
 			except Exception as ex:
 				print(f"[Error.message]: {ex}")
 
-	async def sorter_data(self, *args):
+	async def sorter_data(self, *args) -> list:
 		list_total_data = []
 
 		# list_total_data.append(args[0])
 
-		''' Refresh variables: sisyphus_packages / packages_p10 '''
+		''' Note: Refresh variables: sisyphus_packages / packages_p10 '''
 		# sisyphus_packages = args[0][0]
 		packages_sisyphus = PACKAGES_SISYPHUS
 		# packages_p10 = args[0][1]
 		packages_p10 = PACKAGES_P10
 		result = await Postmen.compare_version_release(packages_sisyphus, packages_p10)
-
+		return result
 
 	@staticmethod
 	async def compare_version_release(package1:list, package2:list) -> list:
@@ -54,9 +54,9 @@ class Postmen(BasicBranches):
 		result = []
 
 		result_package1:list = await Postmen.search_list(package1.copy(), package2.copy())
-		result.append(result_package1)
+		result.append({"sisyphus": result_package1})
 		result_package2:list = await Postmen.search_list(package2.copy(), package1.copy())
-		result.append(result_package2)
+		result.append({"p10":result_package2})
 		return result
 
 	@staticmethod
@@ -84,3 +84,37 @@ class Postmen(BasicBranches):
 				result_package.append(result)
 
 		return result_package
+
+	def found_compare_count(self, sisyphus:list, p10:list) -> list:
+		'''
+		TODO: At entrypoint gets lists - `sisyphus` and 'p10'. \
+			Then:
+			 - dictionaries create of the every list.
+			 - searching a dingle key from the all lists.
+			 -  calculate quantity the every key from the evry lists
+			 - `result_packages` is list all dictionareis. The dictionary insert in the `result_packages` if \
+			  quantility the key of the `sisyphus` more then quantility that key from the `p10`
+
+		:param sisyphus: This's a type list.
+		:param p10: This's a type list.
+		:return: Type list.
+		'''
+		sisyphus_packages = {package['name']: package for package in sisyphus}
+		p10_packages = {package['name']: package for package in p10}
+
+		result_packages = []
+		result_dict_sisyphus_packages = {}
+		result_dict_p10 = {}
+
+		for name, sisyphus_package in sisyphus_packages.items():
+			# result_list_ifTotal_name = {[name in p10_one for p10_one in p10_packages][0]: sisyphus_package }
+			if ([name in p10_key for p10_key in p10_packages]).count(True) > 0:
+				result_dict_sisyphus_packages.update({name:[sisyphus_package for key in sisyphus_packages ]})
+				result_dict_p10.update({name: [package for package in p10_packages.values() if list(package.values()).count(name) > 0]})
+
+		for k, v in result_dict_sisyphus_packages.items():
+			calculator_sisyphus: int = len(result_dict_sisyphus_packages[k])
+			if calculator_sisyphus > len(result_dict_p10[k]):
+				result_packages.append({k: v})
+		return result_packages
+

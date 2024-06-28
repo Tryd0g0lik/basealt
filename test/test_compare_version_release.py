@@ -16,9 +16,9 @@ async  def test_compare_version_release():
 	]
 
 	result = await Postmen.compare_version_release(packages_sisyphus, packages_p10)
-	assert isinstance(result, list)
+	assert isinstance(result, dict)
 	assert len(result) >= 2
 
 	# Test that long lists returned
-	assert len(result[0]) > 0
-	assert len(result[1]) > 0
+	assert len(result[0].keys()[0]) == "sisyphus"
+	assert len(result[1].keys()[0]) == "p10"

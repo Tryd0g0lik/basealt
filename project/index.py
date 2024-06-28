@@ -6,8 +6,11 @@ async def filtering_data():
     postmen = Postmen(pathnames=[APP_PATHNAME + APP_API_BRANCH_1, APP_PATHNAME + APP_API_BRANCH_2])
     response = await postmen.get_api_requestAll(urls=URL_BASIC_API)
     filter_data = []
-    if isinstance(response, list):
-        for data_json in response:
-            filter_data.append(data_json['packages'])
-    else:
-        raise ValueError("[Error]: What something wrong to the 'filtering_data' from 'index.py")
+    if response == None:
+        return
+    # if isinstance(response, list):
+    #     for data_list in response:
+    #         filter_data.append(data_list)
+    # else:
+    #     raise ValueError("[Error]: What something wrong to the 'filtering_data' from 'index.py")
+    await postmen.sorter_data(response)

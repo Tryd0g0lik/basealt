@@ -1,3 +1,4 @@
+# project/index.py
 from project.oop.postmane import Postmen
 from project.env import APP_API_BRANCH_1, APP_API_BRANCH_2, APP_PATHNAME, \
     PACKAGES_SISYPHUS, PACKAGES_P10
@@ -5,8 +6,10 @@ URL_BASIC_API = "https://rdb.altlinux.org/api/"
 
 async def filtering_data():
     postmen = Postmen(pathnames=[APP_PATHNAME + APP_API_BRANCH_1, APP_PATHNAME + APP_API_BRANCH_2])
+
+    ''' getting all the data from API-url '''
     response = await postmen.get_api_requestAll(urls=URL_BASIC_API)
-    filter_data = []
+
     if response == None:
         return
 

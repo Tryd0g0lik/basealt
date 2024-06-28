@@ -1,3 +1,5 @@
+# project/oop/postmane.py
+
 import aiohttp as aiohttp
 from project.env import PACKAGES_P10, PACKAGES_SISYPHUS
 from project.oop.basic import BasicBranches
@@ -11,7 +13,7 @@ class Postmen(BasicBranches):
 
 	async def get_api_requestAll(self, urls:str) -> list:
 		'''
-			TODO: getting all the data
+			TODO: getting all the data from API-url
 		:param urls: type 'str'
 		:return: theis json's list received from the server
 		'''
@@ -35,9 +37,6 @@ class Postmen(BasicBranches):
 				print(f"[Error.message]: {ex}")
 
 	async def sorter_data(self, *args) -> list:
-		list_total_data = []
-
-		# list_total_data.append(args[0])
 
 		''' Note: Refresh variables: sisyphus_packages / packages_p10 '''
 		# sisyphus_packages = args[0][0]
@@ -93,7 +92,7 @@ class Postmen(BasicBranches):
 			 - searching a dingle key from the all lists.
 			 -  calculate quantity the every key from the evry lists
 			 - `result_packages` is list all dictionareis. The dictionary insert in the `result_packages` if \
-			  quantility the key of the `sisyphus` more then quantility that key from the `p10`
+			  quantity the key of the `sisyphus` more then quantity that key from the `p10`
 
 		:param sisyphus: This's a type list.
 		:param p10: This's a type list.

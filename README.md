@@ -60,7 +60,7 @@ print(compare_versions("3.2.1", "1", "3.2.1", "1"))  # Вывод: 0
 Так как остался без уточнения, для выполнения просто взял и сравнил количество пакетов по свойству `name`
 
 
-# Тестовое задание Python
+# Задание
 Only two API-url for under the each run. \
 
 This is module with two classes:
